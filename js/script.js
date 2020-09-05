@@ -91,7 +91,6 @@ class Todo {
 		this.render();
 		this.handler();
 	}
-
 }
 
 const todo = new Todo(".todo-control", ".header-input", ".todo-list", ".todo-completed");
