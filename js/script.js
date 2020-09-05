@@ -27,11 +27,11 @@ class Todo {
 		li.classList.add("todo-item");
 		li.key = todo.key;
 		li.insertAdjacentHTML("beforeend", `
-      <span class="text-todo">${todo.value}</span> 
-      <div class="todo-buttons">
-        <button class="todo-remove"></button>
-        <button class="todo-complete"></button> 
-      </div>
+			<span class="text-todo">${todo.value}</span> 
+			<div class="todo-buttons">
+				<button class="todo-remove"></button>
+				<button class="todo-complete"></button> 
+			</div>
     `);
 		if (todo.completed) {
 			this.todoCompleted.append(li);
