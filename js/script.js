@@ -102,11 +102,9 @@ class Todo {
 			this.completedItem(e);
 		}, 250);
 	}
-
+	// не доделал
 	todoEdit(e) {
-		let as = document.querySelector(".text-todo");
-		console.log(as);
-		as.setAttribute("contenteditable", true);
+
 	}
 
 	handler() {
