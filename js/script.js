@@ -24,11 +24,12 @@ class Todo {
 
 	createItem(todo) {
 		const li = document.createElement("li");
-		li.classList.add("todo-item");
+		li.classList.add("todo-item", "animate__animated");
 		li.key = todo.key;
 		li.insertAdjacentHTML("beforeend", `
 			<span class="text-todo">${todo.value}</span> 
 			<div class="todo-buttons">
+				<button class="todo-edit"></button>
 				<button class="todo-remove"></button>
 				<button class="todo-complete"></button> 
 			</div>
@@ -77,15 +78,50 @@ class Todo {
 		});
 	}
 
+	animatedRemoveItem(e) {
+		const li = e.closest("li");
+		li.classList.add("animate__backOutLeft", "animate__delay-0.5s");
+		setTimeout(() => {
+			this.deleteItem(e);
+		}, 450);
+	}
+
+	animatedComplitedItem(e) {
+		const li = e.closest("li");
+
+		this.todoData.forEach(item => {
+			if (!item.completed && item.key === li.key) {
+				li.classList.add("animate__backOutDown", "animate__delay-0.5s");
+			}
+			if (item.completed && item.key === li.key) {
+				li.classList.add("animate__backOutUp", "animate__delay-0.5s");
+			}
+		});
+
+		setTimeout(() => {
+			this.completedItem(e);
+		}, 250);
+	}
+
+	todoEdit(e) {
+		let as = document.querySelector(".text-todo");
+		console.log(as);
+		as.setAttribute("contenteditable", true);
+	}
+
 	handler() {
 		this.todoContainer.addEventListener("click", event => {
 			const target = event.target;
 			if (target.closest(".todo-complete")) {
-				this.completedItem(target);
+				this.animatedComplitedItem(target);
 			} else if (target.closest(".todo-remove")) {
-				this.deleteItem(target);
+				this.animatedRemoveItem(target);
+			} else if (target.closest(".todo-edit")) {
+				this.todoEdit(target);
 			}
+
 		});
+
 	}
 
 	init() {
