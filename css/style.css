@@ -36,10 +36,7 @@ ul {
     margin: 0;
 }
 
-h1,
-h2,
-h3,
-p {
+h1, h2, h3, p {
     padding: 0;
     margin: 0;
 }
@@ -182,8 +179,8 @@ body {
 }
 
 .todo-remove {
-    background-image: url("../img/trash.png");
-}
+     background-image: url("../img/trash.png");
+ }
 
 .todo-complete {
     background-image: url("../img/uncheck.png");

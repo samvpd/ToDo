@@ -50,6 +50,8 @@ class Todo {
 			};
 			this.todoData.set(newTodo.key, newTodo);
 			this.render();
+		} else {
+			alert("Введите какое-нибудь дело!");
 		}
 	}
 
