@@ -25,15 +25,20 @@ class Todo {
 	createItem(todo) {
 		const li = document.createElement("li");
 		li.classList.add("todo-item", "animate__animated");
+		const input = document.createElement("input");
+		input.setAttribute("type", "text");
+		input.classList.add("text-todo");
+		input.setAttribute("value", todo.value.trim());
+		input.setAttribute("disabled", true);
 		li.key = todo.key;
+		li.appendChild(input);
 		li.insertAdjacentHTML("beforeend", `
-			<span class="text-todo">${todo.value}</span> 
 			<div class="todo-buttons">
 				<button class="todo-edit"></button>
 				<button class="todo-remove"></button>
 				<button class="todo-complete"></button> 
 			</div>
-    `);
+		`);
 		if (todo.completed) {
 			this.todoCompleted.append(li);
 		} else {
@@ -102,9 +107,30 @@ class Todo {
 			this.completedItem(e);
 		}, 250);
 	}
-	// не доделал
-	todoEdit(e) {
 
+	todoEdit(e) {
+		this.todoData.forEach(function (item) {
+			if (item.key === e.closest("li").key) {
+				const selectedInput = e.closest("li").querySelector("input");
+				selectedInput.removeAttribute("disabled");
+				selectedInput.addEventListener("change", () => {
+					item.value = selectedInput.value;
+					if (selectedInput.value.length === 0) {
+						alert("da");
+					} else {
+						this.addToStorage();
+					}
+				});
+				selectedInput.addEventListener("blur", () => {
+					if (selectedInput.value.length === 0) {
+						selectedInput.removeAttribute("disabled");
+					} else {
+						selectedInput.setAttribute("disabled", false);
+					}
+				});
+			}
+		}, this);
+		// this.addToStorage();
 	}
 
 	handler() {
